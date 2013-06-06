@@ -1,28 +1,13 @@
 <html>
 <head>
   <title>Megaphone Finder</title>
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="js/jquery.csv.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <div id="list">
   </div>
-  <script type="text/javascript">
-  var neighbourhoods = {};
-  $.ajax({
-      url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
-  })
-  .success(function(data) {
-    var vendors = $.csv.toObjects(data);
-    $.each(vendors, function(i, vendor) {
-      // console.log(vendor);
-      $('#list').append('<div>' + vendor.Vendor + '</div>');
-      if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
-        neighbourhoods[vendor.Neighbourhood] = [];
-      }
-      neighbourhoods[vendor.Neighbourhood].push(vendor);
-    });
-  });
-  </script>
+  <script src="js/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery.csv.js"></script>
+  <script src="js/megaphone.js"></script>
 </body>
 </html>
