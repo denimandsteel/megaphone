@@ -1,3 +1,29 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: 600px;
+  background: #fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0, 0.5);
+}
+
+#map {
+  background: url(images/map.png) /*top left fixed*/;
+  width: 320px;
+  height: 278px;
+  /*background-size: cover;*/
+}
+
+#list {
+  /*margin-top: 400px;*/
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+  #map {
+    background: url(images/map@2x.png);
+    background-size: 320px 278px;
+  }
 }

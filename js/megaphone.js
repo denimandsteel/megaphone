@@ -5,11 +5,18 @@ $.ajax({
 .success(function(data) {
   var vendors = $.csv.toObjects(data);
   $.each(vendors, function(i, vendor) {
-    // console.log(vendor);
-    $('#list').append('<div>' + vendor.Vendor + '</div>');
     if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
       neighbourhoods[vendor.Neighbourhood] = [];
     }
     neighbourhoods[vendor.Neighbourhood].push(vendor);
+  });
+  $.each(neighbourhoods, function(i, neighbourhood) {
+    $('#list').append('<h2>' + i + '</h2>');
+    neighbourhood.sort(function(a, b) {
+      return a['Cross Street'] > b['Cross Street'];
+    });
+    $.each(neighbourhood, function(i, vendor) {
+      $('#list').append('<div>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + '</div>');
+    });
   });
 });
