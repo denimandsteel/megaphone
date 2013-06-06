@@ -21,7 +21,7 @@ $.ajax({
       return a['Cross Street'] > b['Cross Street'];
     });
     $.each(neighbourhood, function(i, vendor) {
-      var $template = $('<li>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + ' <a>Show in Map</a></li>');
+      var $template = $('<li><img src="' + vendor['Portrait Path'] + '">' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + ' <a>Open in Map</a></li>');
       $('#vendors').append($template);
       crossStreet2LatLng(vendor['Cross Street'], function(location) {
         var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
