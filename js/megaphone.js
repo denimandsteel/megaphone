@@ -11,12 +11,40 @@ $.ajax({
     neighbourhoods[vendor.Neighbourhood].push(vendor);
   });
   $.each(neighbourhoods, function(i, neighbourhood) {
-    $('#list').append('<h2>' + i + '</h2>');
+    $('#vendors').append('<h2>' + i + '</h2>');
     neighbourhood.sort(function(a, b) {
       return a['Cross Street'] > b['Cross Street'];
     });
     $.each(neighbourhood, function(i, vendor) {
-      $('#list').append('<div>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + '</div>');
+      $('#vendors').append('<li>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + '</li>');
     });
   });
 });
+
+window.addEventListener('load', function() {
+    new FastClick(document.body);
+}, false);
+
+$(function() {
+  $('svg path').click(function() {
+    if ($(this).attr('fill') === '#f00') {
+      $(this).attr('fill', '#c1c1c1');
+    }
+    else {
+      $(this).attr('fill', '#f00');
+    }
+  });
+  // $('svg').click(function() {
+  //   console.log(this);
+  //   // $(this).attr('fill', '#f00');
+  // });
+})
+
+// var paths = document.querySelectorAll('svg');
+// for (var i =0; i < paths.length; i++) {
+
+//   paths[i].addEventListener('click', function() {
+//     console.log(this);
+//     this.attr.fill = '#f00';
+//   });
+// }
