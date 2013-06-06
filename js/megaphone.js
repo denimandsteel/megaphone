@@ -1,4 +1,9 @@
 var neighbourhoods = {};
+var geocoder = new google.maps.Geocoder();
+var vancouverBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(49.1989, -123.2654),
+    new google.maps.LatLng(49.3145, -123.0193));
+    
 $.ajax({
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
 })
@@ -16,7 +21,12 @@ $.ajax({
       return a['Cross Street'] > b['Cross Street'];
     });
     $.each(neighbourhood, function(i, vendor) {
-      $('#vendors').append('<li>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + '</li>');
+      var $template = $('<li>' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + ' <a>Show in Map</a></li>');
+      $('#vendors').append($template);
+      crossStreet2LatLng(vendor['Cross Street'], function(location) {
+        var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
+        $template.find('a').attr('href', url);
+      });
     });
   });
 });
@@ -48,3 +58,14 @@ $(function() {
 //     this.attr.fill = '#f00';
 //   });
 // }
+
+// returns geolocation for cross street
+function crossStreet2LatLng(crossStreet, callback) {
+  geocoder.geocode( { 'address': crossStreet, 'bounds': vancouverBounds}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      callback(results[0].geometry.location);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+}
