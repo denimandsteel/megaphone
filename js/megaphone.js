@@ -24,7 +24,6 @@ $(function() {
         return a['Cross Street'] > b['Cross Street'];
       });
       $.each(neighbourhood, function(i, vendor) {
-        console.log(vendor);
         var $template = $([
           '<li>',
             '<h3><em>' + vendor['Vendor'] + '</em> at ' + vendor['Location'] + '</h3>',
@@ -68,7 +67,6 @@ $(function() {
   if (navigator.geolocation) {
     $('#search').click(function() {
       navigator.geolocation.getCurrentPosition(function(position) {
-
         var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
         var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
 
@@ -87,11 +85,12 @@ $(function() {
         // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
         var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null)
         for (var i = 0; i < list.length; i++) {
-          console.log('yep!');
           if ($(list[i]).attr('class') !== 'active') {
             $(list[i]).click();
           }
         }
+      }, function(err) {
+        console.log(err);
       });
     });
   }
