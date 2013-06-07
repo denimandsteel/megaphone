@@ -165,17 +165,19 @@ $(function() {
     $('#search').hide();
   }
 
-  $('#find-vendors').click(function() {
+  $('.go-to-finder').click(function() {
     $('#home').hide();
     $('#about').hide();
     $('#find').show();
     window.scrollTo(0, 0);
+    return false;
   });
   $('#about-megaphone-finder').click(function() {
     $('#home').hide();
     $('#about').show();
     $('#find').hide();
     window.scrollTo(0, 0);
+    return false;
   });
 
   // From: http://stackoverflow.com/a/196991
