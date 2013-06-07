@@ -27,6 +27,8 @@ $(function() {
       if (vendor.Neighbourhood !== '') {
         if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
           neighbourhoods[vendor.Neighbourhood] = [];
+          // Mark and lighten neighbourhoods that have vendors.
+          $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#b0afa3');
         }
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
       };
@@ -35,9 +37,11 @@ $(function() {
 
   new FastClick(document.body);
 
-  // Toggle neighbourhood
   $('svg path').click(function() {
     var neighbourhoodId = $(this).attr('id');
+    // Toggle neighbourhood
+    if (!neighbourhoods[neighbourhoodId]) return;
+    
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
@@ -73,19 +77,19 @@ $(function() {
             '</div>',
           '</li>',
         ].join(''));
-        if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
-          crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
-            var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
-            $template.find('a').attr('href', url);
-          });
-        };
+
         $template.click(function(e) {
-          window.tylor = e;
           if ($(this).hasClass('open') && $(e.target).is('h3')) {
             $(this).removeClass('open');
           }
           else if (!$(this).hasClass('open')) {
             $(this).addClass('open');
+            if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
+              crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
+                var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
+                $template.find('a').attr('href', url);
+              });
+            }
           }
         });
         // $template.find('h3').click(function() {
