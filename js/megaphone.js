@@ -8,6 +8,12 @@ $(function() {
     new google.maps.LatLng(49.3145, -123.0193)
   );
 
+  if (iphone) {
+    $('body').addClass('iphone');
+  }
+  if (("standalone" in window.navigator) && window.navigator.standalone){
+    $('body').addClass('web-app');
+  }
   if (iphone && window.scrollY === 0) {
     window.scrollTo(0,0);
   }
