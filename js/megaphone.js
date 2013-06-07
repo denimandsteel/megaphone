@@ -165,7 +165,7 @@ $(function() {
     $('#search').hide();
   }
 
-  $('.go-to-finder').click(function() {
+  $('.go-to-find').click(function() {
     $('#home').hide();
     $('#about').hide();
     $('#find').show();
