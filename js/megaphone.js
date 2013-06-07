@@ -39,14 +39,16 @@ $(function() {
             '</div>',
           '</li>',
         ].join(''));
+        if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
+          crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
+            var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
+            $template.find('a').attr('href', url);
+          });
+        };
         $template.find('h3, .location').click(function() {
           $(this).parent().toggleClass('open');
         });
         $($hoodTemplate[1]).append($template);
-        // crossStreet2LatLng(vendor['Cross Street'], function(location) {
-        //   var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
-        //   $template.find('a').attr('href', url);
-        // });
       });
     });
   });
@@ -103,14 +105,17 @@ $(function() {
   }
 
   // returns geolocation for cross street
-  function crossStreet2LatLng(crossStreet, callback) {
+  function crossStreet2LatLng(crossStreet, attempt, callback) {
     geocoder.geocode( { 'address': crossStreet, 'bounds': vancouverBounds}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         callback(results[0].geometry.location);
+      } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT && attempt < 5) {
+        setTimeout(function(){
+          crossStreet2LatLng(crossStreet, attempt++, callback);
+        }, 500);
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
   }
-
 });
