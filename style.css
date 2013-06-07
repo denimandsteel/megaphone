@@ -13,67 +13,20 @@ ul,li { margin:0;padding:0;list-style:none; }
 #map { height:556px; width:640px; background:#e9e7d8; box-shadow: 0px 0px 10px rgba(0,0,0, 0.5); position:relative; } 
 #search { position:absolute; bottom:20px; left:20px; font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; font-size:22px; line-height:25px; height:50px; text-transform:uppercase; padding:10px 10px 10px 80px; background:#1d6cb0; color:#fff; text-align:left; border-radius:30px; width:120px; box-shadow: 0 3px 3px rgba(0,0,0,0.5); }
 
-#vendors { padding:50px; }
-#vendors em { color:#eb4859; }
-#vendors ul { list-style:none; margin:0 0 40px; padding:0; } 
-#vendors li { margin:0; padding:20px 0; background:url(images/dots.gif) no-repeat 0 bottom; }
-.vendor { float:left; margin:30px 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
-.maplink { margin:10px 50px 10px 0; width:200px; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; background:#eb4859; float:right; }
-.spotting { clear:both; }
-.location { font-size:32px; }
-.open .location,
-.times { font-size:40px; line-height:45px; width:270px; float:right; padding:30px 0; }
-
-#vendors li.open { padding-bottom:100px; }
-
-.location,
-.vendor,
-.times,
-.maplink { font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; }
-
-.vendor,
-.times,
-.spotting,
-.maplink { display:none; }
-
-.open .vendor,
-.open .times,
-.open .spotting,
-.open .maplink { display:block; }
-
-
-#logo,
-#search,
-#vendors h3,
-#vendors .open h3 { background-image:url(images/icons.png); background-repeat:no-repeat; background-position:0 0; }
-#search { background-position:0 -75px; }
-#vendors h3    { background-position:right -145px; }
-#vendors .open h3 { background-position:right -215px; }
-
-
-#footer h4, #footer a { padding:19px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
-#footer h4 { padding:20px 50px; background:#bab9ad; } 
-#footer li { border-bottom:2px solid #bab9ad; }
-
-.marker {
+#current-position { display: none; }
+#current-position.active {
+  display: block;
   pointer-events:none;
   position: absolute;
   width: 12px;
   height: 12px;
   border-radius: 10px;
   box-shadow: 1px 1px 2px rgba(0,0,0, 0.3);
-  background: #FFE400;
-  /* opacity: 0.5; */
-  /*
-  box-shadow: 1px 1px 3px #000;
-  */
-}
-.marker {
   background: #1d6cb0;
-  z-index: 1;
+  /*z-index: 1;*/
 }
 
-.marker .pulse {
+#current-position.active .pulse {
   width: 20px;
   height: 20px;
   display: block;
@@ -129,10 +82,45 @@ ul,li { margin:0;padding:0;list-style:none; }
         opacity: 0;
     }
 }
-/*
-@media all and (-webkit-min-device-pixel-ratio: 1.5) {
-  #map {
-    background: url(images/map@2x.png);
-    background-size: 320px 278px;
-  }
-}*/
+
+#vendors { padding:50px; }
+#vendors em { color:#eb4859; }
+#vendors ul { list-style:none; margin:0 0 40px; padding:0; } 
+#vendors li { margin:0; padding:20px 0; background:url(images/dots.gif) no-repeat 0 bottom; }
+.vendor { float:left; margin:30px 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
+.maplink { margin:10px 50px 10px 0; width:200px; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; background:#eb4859; float:right; }
+.spotting { clear:both; }
+.location { font-size:32px; }
+.open .location,
+.times { font-size:40px; line-height:45px; width:270px; float:right; padding:30px 0; }
+
+#vendors li.open { padding-bottom:100px; }
+
+.location,
+.vendor,
+.times,
+.maplink { font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; }
+
+.vendor,
+.times,
+.spotting,
+.maplink { display:none; }
+
+.open .vendor,
+.open .times,
+.open .spotting,
+.open .maplink { display:block; }
+
+
+#logo,
+#search,
+#vendors h3,
+#vendors .open h3 { background-image:url(images/icons.png); background-repeat:no-repeat; background-position:0 0; }
+#search { background-position:0 -75px; }
+#vendors h3    { background-position:right -145px; }
+#vendors .open h3 { background-position:right -215px; }
+
+
+#footer h4, #footer a { padding:19px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
+#footer h4 { padding:20px 50px; background:#bab9ad; } 
+#footer li { border-bottom:2px solid #bab9ad; }

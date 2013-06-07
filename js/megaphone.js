@@ -55,40 +55,48 @@ $(function() {
   new FastClick(document.body);
 
   $('svg path').click(function() {
-    if ($(this).attr('fill') === '#eb4859') {
+    if ($(this).attr('class') === 'active') {
+      $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
     }
     else {
+      $(this).attr('class', 'active');
       $(this).attr('fill', '#eb4859');
     }
   });
 
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      $('#latitude').val(position.coords.latitude);
-      $('#longitude').val(position.coords.longitude);
+    $('#search').click(function() {
+      navigator.geolocation.getCurrentPosition(function(position) {
 
-      var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
-      var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
+        var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
+        var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
 
-      $('#current-position').css({ top: (latPercent * 556) + 'px', left: (lonPercent * 640) +'px' });
+        $('#current-position').css({ top: (latPercent * 556) + 'px', left: (lonPercent * 640) +'px' }).addClass('active');
 
-      $('svg path').each(function(i, path) {
-        var top = (latPercent * 556);
-        var left = (lonPercent * 640);
+        $('svg path').each(function(i, path) {
+          var top = (latPercent * 556);
+          var left = (lonPercent * 640);
+        });
+
+        var nearby = document.querySelectorAll('svg')[0].createSVGRect()
+        nearby.x = (lonPercent * 640);
+        nearby.y = (latPercent * 556);
+        nearby.width = 15;
+        nearby.height = 15;
+        // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
+        var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null)
+        for (var i = 0; i < list.length; i++) {
+          console.log('yep!');
+          if ($(list[i]).attr('class') !== 'active') {
+            $(list[i]).click();
+          }
+        }
       });
-
-      var nearby = document.querySelectorAll('svg')[0].createSVGRect()
-      nearby.x = (lonPercent * 640);
-      nearby.y = (latPercent * 556);
-      nearby.width = 15;
-      nearby.height = 15;
-      // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
-      var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null)
-      for (var i = 0; i < list.length; i++) {
-        $(list[i]).click();
-      }
     });
+  }
+  else {
+    $('#search').hide();
   }
 
   // From: http://stackoverflow.com/a/196991
