@@ -65,7 +65,7 @@ $(function() {
             '<h3><em>' + vendor['Vendor'] + '</em>' + (vendor['Location'] !== '' ? ' at ' + vendor['Location']  : '') + '</h3>',
             '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
             '<div class="location">' + vendor['Cross Street'] + '</div>',
-            '<a class="maplink">Open in Maps</a>',
+            '<a class="maplink button">Open in Maps</a>',
             '<div class="times">' + vendor['Hours'] + '</div>',
             '<div class="spotting">',
               '<h4>Where to find ' + vendor['Vendor'] + ':</h4>',
@@ -79,9 +79,21 @@ $(function() {
             $template.find('a').attr('href', url);
           });
         };
-        $template.find('h3, .location').click(function() {
-          $(this).parent().toggleClass('open');
+        $template.click(function(e) {
+          window.tylor = e;
+          if ($(this).hasClass('open') && $(e.target).is('h3')) {
+            $(this).removeClass('open');
+          }
+          else if (!$(this).hasClass('open')) {
+            $(this).addClass('open');
+          }
         });
+        // $template.find('h3').click(function() {
+        //   if ($(this).parent().hasClass('open')) {
+        //     console.log('closing');
+        //     $(this).parent().removeClass('open');
+        //   }
+        // });
         $($hoodTemplate.find('ul')).append($template);
       });
       $('#vendors').prepend($hoodTemplate);
