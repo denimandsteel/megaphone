@@ -66,14 +66,16 @@ $(function() {
             '</div>',
           '</li>',
         ].join(''));
-        if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
-          crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
-            var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
-            $template.find('a').attr('href', url);
-          });
-        };
         $template.find('h3, .location').click(function() {
           $(this).parent().toggleClass('open');
+          if ($(this).parent().hasClass('open')) {
+            if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
+              crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
+                var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
+                $template.find('a').attr('href', url);
+              });
+            }
+          }
         });
         $($hoodTemplate.find('ul')).append($template);
       });
