@@ -10,7 +10,7 @@ ul,li { margin:0;padding:0;list-style:none; }
 #header #logo { display:block; height:40px; text-decoration:none; color:#fff; padding: 20px 80px; } 
 #header .hint { /*min-height:40px;*/ padding:20px 50px; background:rgba(13,62,105,0.8); position:absolute; width:540px; left:0; top:80px; font-size:0.75em; line-height: 1em; color:#fff; font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; z-index:1; } 
 
-#map { height:560px; width:640px; background:#e9e7d8; box-shadow: 0px 0px 10px rgba(0,0,0, 0.5); position:relative; } 
+#map { height:556px; width:640px; background:#e9e7d8; box-shadow: 0px 0px 10px rgba(0,0,0, 0.5); position:relative; } 
 #search { position:absolute; bottom:20px; left:20px; font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; font-size:22px; line-height:25px; height:50px; text-transform:uppercase; padding:10px 10px 10px 80px; background:#1d6cb0; color:#fff; text-align:left; border-radius:30px; width:120px; box-shadow: 0 3px 3px rgba(0,0,0,0.5); }
 
 #vendors { padding:50px; }
