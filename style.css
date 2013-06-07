@@ -30,7 +30,7 @@ ul,li { margin:0;padding:0;list-style:none; }
 #search { position:absolute; bottom:20px; left:20px; font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; font-size:22px; line-height:25px; height:50px; text-transform:uppercase; padding:10px 10px 10px 80px; background:#1d6cb0; color:#fff; text-align:left; border-radius:30px; width:120px; box-shadow: 0 3px 3px rgba(0,0,0,0.5); cursor:pointer; }
 
 /* vendor results list styles */
-#vendors, #intro { padding:50px; }
+#vendors, #intro, #about { padding:50px; }
 #vendors em { color:#eb4859; }
 #vendors ul { list-style:none; margin:0 0 40px; padding:0; } 
 #vendors li { margin:0; padding:16px 0 24px; background:url('images/dots.gif') no-repeat 0 bottom; overflow:hidden; }
@@ -45,10 +45,11 @@ ul,li { margin:0;padding:0;list-style:none; }
 .open .location, .times { font-size:40px; line-height:45px; width:270px; float:right; padding:30px 0; }
 
 /* footer styles */
-#footer h4, #footer a { padding:19px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
+#footer h4, #footer a, #footer span { cursor: pointer; padding:19px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
 #footer h4 { padding:20px 50px; background:#bab9ad; } 
 #footer li { border-bottom:2px solid #bab9ad; }
-#add-to-home-screen { padding:80px 120px 230px; background:#2f76b4 url('images/big-arrow.png') no-repeat center 240px; color:#fff; text-align:center; line-height:50px; }
+#add-to-home-screen { display: none; }
+body.iphone #add-to-home-screen { display: block; padding:80px 120px 230px; background:#2f76b4 url('images/big-arrow.png') no-repeat center 240px; color:#fff; text-align:center; line-height:50px; }
 
 /* sprites */
 #logo, #search, #vendors h3, #vendors .open h3 { background-image:url('images/icons.png'); background-repeat:no-repeat; background-position:0 0; }
@@ -59,12 +60,11 @@ ul,li { margin:0;padding:0;list-style:none; }
 /* vendors expanded/hidden view */
 .vendor, .times, .spotting, .maplink { display:none; }
 .open .vendor, .open .times, .open .spotting, .open .maplink { display:block; }
-svg path[vendored="yes"] {
-  cursor: hand;
-}
+svg path[vendored="yes"] { cursor: pointer; }
 /** TYLOR's HAXX ZONE */
 /*#home { display: none; }*/
 #find { display: none; }
+#about { display: none; }
 .hint {  -webkit-transition: opacity 0.5s ease-out; }
 .hide { opacity: 0; }
 

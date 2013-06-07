@@ -167,7 +167,14 @@ $(function() {
 
   $('#find-vendors').click(function() {
     $('#home').hide();
+    $('#about').hide();
     $('#find').show();
+    window.scrollTo(0, 0);
+  });
+  $('#about-megaphone-finder').click(function() {
+    $('#home').hide();
+    $('#about').show();
+    $('#find').hide();
     window.scrollTo(0, 0);
   });
 
