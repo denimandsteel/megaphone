@@ -56,7 +56,7 @@ $(function() {
 
   $('svg path').click(function() {
     if ($(this).attr('fill') === '#eb4859') {
-      $(this).attr('fill', '#c1c1c1');
+      $(this).attr('fill', '#b0afa3');
     }
     else {
       $(this).attr('fill', '#eb4859');
