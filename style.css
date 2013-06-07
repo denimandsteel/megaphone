@@ -59,7 +59,9 @@ ul,li { margin:0;padding:0;list-style:none; }
 /* vendors expanded/hidden view */
 .vendor, .times, .spotting, .maplink { display:none; }
 .open .vendor, .open .times, .open .spotting, .open .maplink { display:block; }
-
+svg path[vendored="yes"] {
+  cursor: hand;
+}
 /** TYLOR's HAXX ZONE */
 /*#home { display: none; }*/
 #find { display: none; }
