@@ -1,5 +1,6 @@
 $(function() {
   var neighbourhoods = {};
+  var hintClicks = [];
   var geocoder = new google.maps.Geocoder();
   var vancouverBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(49.1989, -123.2654),
@@ -10,21 +11,44 @@ $(function() {
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
   })
   .success(function(data) {
-    $('#vendors').html('');
     var vendors = $.csv.toObjects(data);
     $.each(vendors, function(i, vendor) {
-      if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
-        neighbourhoods[vendor.Neighbourhood] = [];
-      }
-      neighbourhoods[vendor.Neighbourhood].push(vendor);
+      if (vendor.Neighbourhood !== '') {
+        if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
+          neighbourhoods[vendor.Neighbourhood] = [];
+        }
+        neighbourhoods[vendor.Neighbourhood].push(vendor);  
+      };
     });
-    $.each(neighbourhoods, function(i, neighbourhood) {
-      var $hoodTemplate = $('<h2>' + toTitleCase(i.replace('-', ' ')) + '</h2><ul></ul>');
-      $('#vendors').append($hoodTemplate);
-      neighbourhood.sort(function(a, b) {
+  });
+
+  new FastClick(document.body);
+
+  // Toggle neighbourhood
+  $('svg path').click(function() {
+    var neighbourhoodId = $(this).attr('id');
+    if ($(this).attr('class') === 'active') {
+      $(this).attr('class', '');
+      $(this).attr('fill', '#b0afa3');
+      $('#vendors').find('[neighbourhoodId="' + neighbourhoodId + '"]').remove();
+    }
+    else {
+      // TODO: Also check cookie.
+      if (hintClicks.indexOf($(this).attr('id')) === -1) {
+        hintClicks.push($(this).attr('id'));
+      }
+      if (hintClicks.length >= 2) {
+        $('.hint').addClass('hide');
+      }
+      $(this).attr('class', 'active');
+      $(this).attr('fill', '#eb4859');
+      // render neighbourhood template
+      var vendors = neighbourhoods[neighbourhoodId];
+      var $hoodTemplate = $('<div neighbourhoodId="' + neighbourhoodId + '" class="neighbourhood"><h2>' + toTitleCase(neighbourhoodId.replace('-', ' ')) + '</h2><ul></ul></div>');
+      vendors.sort(function(a, b) {
         return a['Cross Street'] > b['Cross Street'];
       });
-      $.each(neighbourhood, function(i, vendor) {
+      $.each(vendors, function(index, vendor) {
         var $template = $([
           '<li>',
             '<h3><em>' + vendor['Vendor'] + '</em>' + (vendor['Location'] !== '' ? ' at ' + vendor['Location']  : '') + '</h3>',
@@ -47,29 +71,15 @@ $(function() {
         $template.find('h3, .location').click(function() {
           $(this).parent().toggleClass('open');
         });
-        $($hoodTemplate[1]).append($template);
+        $($hoodTemplate.find('ul')).append($template);
       });
-    });
-  });
-
-  new FastClick(document.body);
-
-  window.hintClicks = [];
-  $('svg path').click(function() {
-    if ($(this).attr('class') === 'active') {
-      $(this).attr('class', '');
-      $(this).attr('fill', '#b0afa3');
+      $('#vendors').prepend($hoodTemplate);
+    }
+    if ($('.neighbourhood').length > 0) {
+      $('#vendor-hint').hide();
     }
     else {
-      // TODO: Also check cookie.
-      if (hintClicks.indexOf($(this).attr('id')) === -1) {
-        hintClicks.push($(this).attr('id'));
-      }
-      if (hintClicks.length >= 2) {
-        $('.hint').addClass('hide');
-      }
-      $(this).attr('class', 'active');
-      $(this).attr('fill', '#eb4859');
+      $('#vendor-hint').show();
     }
   });
 
