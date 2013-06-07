@@ -132,6 +132,7 @@ $(function() {
     return false;
   });
   $('#about-megaphone-finder').click(function() {
+    // ga('send', 'event', 'button', 'click', 'about');
     $('#home').hide();
     $('#about').show();
     $('#find').hide();
