@@ -16,6 +16,8 @@ $(function() {
       if (vendor.Neighbourhood !== '') {
         if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
           neighbourhoods[vendor.Neighbourhood] = [];
+          // Mark and lighten neighbourhoods that have vendors.
+          $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#b0afa3');
         }
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
       };
@@ -24,9 +26,11 @@ $(function() {
 
   new FastClick(document.body);
 
-  // Toggle neighbourhood
   $('svg path').click(function() {
     var neighbourhoodId = $(this).attr('id');
+    // Toggle neighbourhood
+    if (!neighbourhoods[neighbourhoodId]) return;
+    
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
