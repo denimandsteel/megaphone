@@ -25,7 +25,6 @@ $(function() {
       });
       $.each(neighbourhood, function(i, vendor) {
         console.log(vendor);
-        // var $template = $('<li><img src="' + vendor['Portrait Path'] + '">' + vendor['Vendor'] + ' - ' + vendor['Cross Street'] + ' <a>Open in Map</a></li>');
         var $template = $([
           '<li>',
             '<h3><em>' + vendor['Vendor'] + '</em> at ' + vendor['Location'] + '</h3>',
@@ -67,21 +66,16 @@ $(function() {
       $('#latitude').val(position.coords.latitude);
       $('#longitude').val(position.coords.longitude);
 
-      
-      var latPercent = (position.coords.latitude - 49.3161)/(49.1962 - 49.3161);
-      var lonPercent = (position.coords.longitude + 123.2347)/(-123.0229 + 123.2347);
+      var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
+      var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
 
       $('#current-position').css({ top: (latPercent * 556) + 'px', left: (lonPercent * 640) +'px' });
 
       $('svg path').each(function(i, path) {
         var top = (latPercent * 556);
         var left = (lonPercent * 640);
-        // $(path).
-      })
-      //-123.2347,49.1962,
-      //-123.0229,49.3161
+      });
 
-      // $('svg path').attr('fill', '#c1c1c1');
       var nearby = document.querySelectorAll('svg')[0].createSVGRect()
       nearby.x = (lonPercent * 640);
       nearby.y = (latPercent * 556);
@@ -90,10 +84,8 @@ $(function() {
       // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
       var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null)
       for (var i = 0; i < list.length; i++) {
-        // $(list[i]).attr('fill', '#eb4859');
         $(list[i]).click();
       }
-
     });
   }
 
