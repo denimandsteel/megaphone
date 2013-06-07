@@ -202,7 +202,7 @@ $(function() {
     $('#' + neighbourhoodId).attr('fill', '#eb4859');
     // render neighbourhood template
     var vendors = neighbourhoods[neighbourhoodId];
-    var $hoodTemplate = $('<div neighbourhoodId="' + neighbourhoodId + '" class="neighbourhood"><h2>' + toTitleCase(neighbourhoodId.replace('-', ' ')) + '</h2><ul></ul></div>');
+    var $hoodTemplate = $('<div id="neighbourhood-' + neighbourhoodId + '" class="neighbourhood"><h2>' + toTitleCase(neighbourhoodId.replace('-', ' ')) + '</h2><ul></ul></div>');
     vendors.sort(function(a, b) {
       return a['Cross Street'] > b['Cross Street'];
     });
