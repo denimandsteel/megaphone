@@ -17,6 +17,9 @@ $(function() {
   if (iphone && window.scrollY === 0) {
     window.scrollTo(0,0);
   }
+  if ($.cookie('my_hoods' === undefined)) {
+    $.cookie('my_hoods', JSON.stringify([]), { expires: 90, path: '/' });
+  };
     
   $.ajax({
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
@@ -33,6 +36,10 @@ $(function() {
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
       };
     });
+
+    // Mark my neighbourhoods from cookie
+    var myHoods = JSON.parse($.cookie('my_hoods'));
+    $.each(myHoods);
   });
 
   new FastClick(document.body);
@@ -46,6 +53,14 @@ $(function() {
       $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
       $('#vendors').find('[neighbourhoodId="' + neighbourhoodId + '"]').remove();
+      
+      // remove neighborhood from cookie
+      var myHoods = JSON.parse($.cookie('my_hoods'));
+      var removeIndex = myHoods.indexOf(neighbourhoodId);
+      if (removeIndex > -1) {
+        myHoods.splice(removeIndex, 1);
+        $.cookie('my_hoods', JSON.stringify(myHoods));  
+      };
     }
     else {
       // TODO: Also check cookie.
@@ -101,6 +116,12 @@ $(function() {
         $($hoodTemplate.find('ul')).append($template);
       });
       $('#vendors').prepend($hoodTemplate);
+
+      // TODO: add neighbourhood to the cookie
+      var myHoods = JSON.parse($.cookie('my_hoods')) || [];
+      myHoods.push(neighbourhoodId);
+      jQuery.unique(myHoods);
+      $.cookie('my_hoods', JSON.stringify(myHoods));
     }
     if ($('.neighbourhood').length > 0) {
       $('#vendor-hint').hide();
