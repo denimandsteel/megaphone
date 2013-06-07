@@ -10,6 +10,7 @@ $(function() {
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
   })
   .success(function(data) {
+    $('#vendors').html('');
     var vendors = $.csv.toObjects(data);
     $.each(vendors, function(i, vendor) {
       if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
@@ -26,7 +27,7 @@ $(function() {
       $.each(neighbourhood, function(i, vendor) {
         var $template = $([
           '<li>',
-            '<h3><em>' + vendor['Vendor'] + '</em> at ' + vendor['Location'] + '</h3>',
+            '<h3><em>' + vendor['Vendor'] + '</em>' + (vendor['Location'] !== '' ? ' at ' + vendor['Location']  : '') + '</h3>',
             '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
             '<div class="location">' + vendor['Cross Street'] + '</div>',
             '<a class="maplink">Open in Maps</a>',
@@ -53,12 +54,20 @@ $(function() {
 
   new FastClick(document.body);
 
+  window.hintClicks = [];
   $('svg path').click(function() {
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
     }
     else {
+      // TODO: Also check cookie.
+      if (hintClicks.indexOf($(this).attr('id')) === -1) {
+        hintClicks.push($(this).attr('id'));
+      }
+      if (hintClicks.length >= 2) {
+        $('.hint').addClass('hide');
+      }
       $(this).attr('class', 'active');
       $(this).attr('fill', '#eb4859');
     }
