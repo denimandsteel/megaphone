@@ -140,6 +140,12 @@ $(function() {
     $('#search').hide();
   }
 
+  $('#find-vendors').click(function() {
+    $('#home').hide();
+    $('#find').show();
+    window.scrollTo(0, 0);
+  });
+
   // From: http://stackoverflow.com/a/196991
   function toTitleCase(str) {
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
