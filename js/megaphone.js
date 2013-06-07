@@ -1,11 +1,16 @@
 $(function() {
   var neighbourhoods = {};
   var hintClicks = [];
+  var iphone = !!navigator.userAgent.match(/iphone/i);
   var geocoder = new google.maps.Geocoder();
   var vancouverBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(49.1989, -123.2654),
     new google.maps.LatLng(49.3145, -123.0193)
   );
+
+  if (iphone && window.scrollY === 0) {
+    window.scrollTo(0,0);
+  }
     
   $.ajax({
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
