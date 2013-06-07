@@ -12,13 +12,15 @@ $(function() {
   .success(function(data) {
     var vendors = $.csv.toObjects(data);
     $.each(vendors, function(i, vendor) {
-      if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
-        neighbourhoods[vendor.Neighbourhood] = [];
-      }
-      neighbourhoods[vendor.Neighbourhood].push(vendor);
+      if (vendor.Neighbourhood !== '') {
+        if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
+          neighbourhoods[vendor.Neighbourhood] = [];
+        }
+        neighbourhoods[vendor.Neighbourhood].push(vendor);  
+      };
     });
     $.each(neighbourhoods, function(i, neighbourhood) {
-      var $hoodTemplate = $('<h2>' + toTitleCase(i.replace('-', ' ')) + '</h2><ul></ul>');
+      var $hoodTemplate = $('<div neighbourhoodId="' + i + '"><h2>' + toTitleCase(i.replace('-', ' ')) + '</h2><ul></ul></div>');
       $('#vendors').append($hoodTemplate);
       neighbourhood.sort(function(a, b) {
         return a['Cross Street'] > b['Cross Street'];
@@ -47,21 +49,27 @@ $(function() {
         $template.find('h3, .location').click(function() {
           $(this).parent().toggleClass('open');
         });
-        $($hoodTemplate[1]).append($template);
+        $($hoodTemplate.find('ul')).append($template);
       });
     });
   });
 
   new FastClick(document.body);
 
+  // Toggle neighbourhood
   $('svg path').click(function() {
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
       $(this).attr('fill', '#b0afa3');
+
     }
     else {
       $(this).attr('class', 'active');
       $(this).attr('fill', '#eb4859');
+      var neighbourhoodId = $(this).attr('id');
+      // render neighbourhood template
+      // prepend to the hoods list.
+      $('#vendors ul').prepend();
     }
   });
 
