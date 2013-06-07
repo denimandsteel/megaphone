@@ -19,13 +19,28 @@ $(function() {
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
       };
     });
-    $.each(neighbourhoods, function(i, neighbourhood) {
-      var $hoodTemplate = $('<div neighbourhoodId="' + i + '"><h2>' + toTitleCase(i.replace('-', ' ')) + '</h2><ul></ul></div>');
-      $('#vendors').append($hoodTemplate);
-      neighbourhood.sort(function(a, b) {
+  });
+
+  new FastClick(document.body);
+
+  // Toggle neighbourhood
+  $('svg path').click(function() {
+    var neighbourhoodId = $(this).attr('id');
+    if ($(this).attr('class') === 'active') {
+      $(this).attr('class', '');
+      $(this).attr('fill', '#b0afa3');
+      $('#vendors').find('[neighbourhoodId="' + neighbourhoodId + '"]').remove();
+    }
+    else {
+      $(this).attr('class', 'active');
+      $(this).attr('fill', '#eb4859');
+      // render neighbourhood template
+      var vendors = neighbourhoods[neighbourhoodId];
+      var $hoodTemplate = $('<div neighbourhoodId="' + neighbourhoodId + '"><h2>' + toTitleCase(neighbourhoodId.replace('-', ' ')) + '</h2><ul></ul></div>');
+      vendors.sort(function(a, b) {
         return a['Cross Street'] > b['Cross Street'];
       });
-      $.each(neighbourhood, function(i, vendor) {
+      $.each(vendors, function(index, vendor) {
         console.log(vendor);
         var $template = $([
           '<li>',
@@ -51,25 +66,9 @@ $(function() {
         });
         $($hoodTemplate.find('ul')).append($template);
       });
-    });
-  });
-
-  new FastClick(document.body);
-
-  // Toggle neighbourhood
-  $('svg path').click(function() {
-    if ($(this).attr('class') === 'active') {
-      $(this).attr('class', '');
-      $(this).attr('fill', '#b0afa3');
-
-    }
-    else {
-      $(this).attr('class', 'active');
-      $(this).attr('fill', '#eb4859');
-      var neighbourhoodId = $(this).attr('id');
-      // render neighbourhood template
+    
       // prepend to the hoods list.
-      $('#vendors ul').prepend();
+      $('#vendors').prepend($hoodTemplate);
     }
   });
 
