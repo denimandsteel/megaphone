@@ -42,6 +42,30 @@ module.exports = function(grunt) {
     watch: {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint', 'concat']
+    },
+    csslint: {
+      strict: {
+        options: {
+          import: 2
+        },
+        src: ['style.css']
+      },
+      lax: {
+        options: {
+          import: false
+        },
+        src: ['style.css']
+      }
+    },
+    cssmin: {
+      add_banner: {
+        options: {
+          banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %>\n *  style.css\n */'
+        },
+        files: {
+          'style.min.css': ['style.css']
+        }
+      }
     }
   });
 
@@ -49,6 +73,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
