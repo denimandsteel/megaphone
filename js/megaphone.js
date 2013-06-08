@@ -110,7 +110,7 @@ $(function() {
           }
         }
       }, function(err) {
-        console.log(err);
+        alert(err);
       });
     });
   }
