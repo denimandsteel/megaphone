@@ -49,7 +49,7 @@ $(function() {
       $('#vendors').find('#neighbourhood-' + neighbourhoodId).remove();
       
       // remove neighborhood from cookie
-      var myHoods = JSON.parse($.cookie('my_hoods')) || [];
+      var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
       var removeIndex = myHoods.indexOf(neighbourhoodId);
       if (removeIndex > -1) {
         myHoods.splice(removeIndex, 1);
@@ -68,7 +68,7 @@ $(function() {
       selectNeighourhoodWithId(neighbourhoodId);
       
       // add neighbourhood to the cookie
-      var myHoods = JSON.parse($.cookie('my_hoods')) || [];
+      var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
       myHoods.push(neighbourhoodId);
       jQuery.unique(myHoods);
       $.cookie('my_hoods', JSON.stringify(myHoods));
@@ -120,7 +120,7 @@ $(function() {
     $('#about').hide();
     $('#find').show();
     // Mark my neighbourhoods from cookie
-    var myHoods = JSON.parse($.cookie('my_hoods')) || [];
+    var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
     jQuery.unique(myHoods);
     $.each(myHoods, function(i, hoodId) {
       selectNeighourhoodWithId(hoodId);
