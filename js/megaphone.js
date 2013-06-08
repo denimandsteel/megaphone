@@ -17,10 +17,7 @@ $(function() {
   if (iphone && window.scrollY === 0) {
     window.scrollTo(0,0);
   }
-  if ($.cookie('my_hoods' === undefined)) {
-    $.cookie('my_hoods', JSON.stringify([]), { expires: 90, path: '/' });
-  };
-    
+
   $.ajax({
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
   })
@@ -124,6 +121,7 @@ $(function() {
     $('#find').show();
     // Mark my neighbourhoods from cookie
     var myHoods = JSON.parse($.cookie('my_hoods'));
+    alert(myHoods);
     jQuery.unique(myHoods);
     $.each(myHoods, function(i, hoodId) {
       selectNeighourhoodWithId(hoodId);
