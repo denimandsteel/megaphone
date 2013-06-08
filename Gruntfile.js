@@ -66,6 +66,17 @@ module.exports = function(grunt) {
           'style.min.css': ['style.css']
         }
       }
+    },
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'index.html': 'index.src.html',
+        }
+      }
     }
   });
 
@@ -75,6 +86,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   // grunt-contrib-htmlmin
   // grunt-contrib-imagemin
   // grunt-manifest
