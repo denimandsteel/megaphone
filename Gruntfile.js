@@ -7,22 +7,28 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['js/*.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: [
+          'js/lib/jquery-1.10.1.min.js',
+          'js/lib/jquery.csv.js',
+          'js/lib/fastclick.min.js',
+          'js/lib/jquery.cookie.js',
+          'js/app.js',
+        ],
+        dest: 'js/dist/<%= pkg.name %>.js'
       }
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %>\n *  <%= concat.dist.src %>\n */\n'
       },
       dist: {
         files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+          'js/dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
         }
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'js/megaphone.js'],
+      files: ['gruntfile.js', 'js/app.js'],
       options: {
         // options here to override JSHint defaults
         globals: {
