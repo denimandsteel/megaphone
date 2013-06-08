@@ -197,6 +197,7 @@ $(function() {
             crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
               var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
               $template.find('a').attr('href', url);
+              // ?? http://developer.apple.com/library/ios/#featuredarticles/iPhoneURLScheme_Reference/Articles/MapLinks.html
             });
           }
         }

@@ -49,7 +49,7 @@ ul,li { margin:0;padding:0;list-style:none; }
 #footer h4 { padding:20px 50px; background:#bab9ad; } 
 #footer li { border-bottom:2px solid #bab9ad; }
 #add-to-home-screen { display: none; }
-body.iphone #add-to-home-screen { display: block; padding:80px 120px 230px; background:#2f76b4 url('images/big-arrow.png') no-repeat center 240px; color:#fff; text-align:center; line-height:50px; }
+body.iphone #add-to-home-screen { display: block; padding:60px 120px 200px; background:#2f76b4 url('images/big-arrow.png') no-repeat center 240px; color:#fff; text-align:center; line-height:50px; }
 
 /* sprites */
 #logo, #search, #vendors h3, #vendors .open h3 { background-image:url('images/icons.png'); background-repeat:no-repeat; background-position:0 0; }
