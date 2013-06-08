@@ -31,7 +31,7 @@ $(function() {
           $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#b0afa3');
         }
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
-      };
+      }
     });
     
   });
@@ -40,6 +40,7 @@ $(function() {
 
   $('svg path').click(function() {
     var neighbourhoodId = $(this).attr('id');
+    var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
     // Toggle neighbourhood
     if (!neighbourhoods[neighbourhoodId]) return;
     
@@ -49,12 +50,11 @@ $(function() {
       $('#vendors').find('#neighbourhood-' + neighbourhoodId).remove();
       
       // remove neighborhood from cookie
-      var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
       var removeIndex = myHoods.indexOf(neighbourhoodId);
       if (removeIndex > -1) {
         myHoods.splice(removeIndex, 1);
         $.cookie('my_hoods', JSON.stringify(myHoods));  
-      };
+      }
     }
     else {
       // TODO: Also check cookie.
@@ -68,7 +68,6 @@ $(function() {
       selectNeighourhoodWithId(neighbourhoodId);
       
       // add neighbourhood to the cookie
-      var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
       myHoods.push(neighbourhoodId);
       jQuery.unique(myHoods);
       $.cookie('my_hoods', JSON.stringify(myHoods));
@@ -94,13 +93,13 @@ $(function() {
           var left = (lonPercent * 640);
         });
 
-        var nearby = document.querySelectorAll('svg')[0].createSVGRect()
+        var nearby = document.querySelectorAll('svg')[0].createSVGRect();
         nearby.x = (lonPercent * 640);
         nearby.y = (latPercent * 556);
         nearby.width = 15;
         nearby.height = 15;
         // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
-        var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null)
+        var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null);
         for (var i = 0; i < list.length; i++) {
           if ($(list[i]).attr('class') !== 'active') {
             $(list[i]).click();
@@ -172,14 +171,14 @@ $(function() {
     $.each(vendors, function(index, vendor) {
       var $template = $([
         '<li>',
-          '<h3><em>' + vendor['Vendor'] + '</em>' + (vendor['Location'] !== '' ? ' at ' + vendor['Location']  : '') + '</h3>',
+          '<h3><em>' + vendor.Vendor + '</em>' + (vendor.Location !== '' ? ' at ' + vendor.Location  : '') + '</h3>',
           '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
           '<div class="location">' + vendor['Cross Street'] + '</div>',
           '<a class="maplink button">Open in Maps</a>',
-          '<div class="times">' + vendor['Hours'] + '</div>',
+          '<div class="times">' + vendor.Hours + '</div>',
           '<div class="spotting">',
-            '<h4>Where to find ' + vendor['Vendor'] + ':</h4>',
-            '<p>' + vendor['Description'] + '</p>',
+            '<h4>Where to find ' + vendor.Vendor + ':</h4>',
+            '<p>' + vendor.Description + '</p>',
           '</div>',
         '</li>',
       ].join(''));
