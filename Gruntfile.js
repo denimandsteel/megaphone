@@ -75,6 +75,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  // grunt-contrib-htmlmin
+  // grunt-contrib-imagemin
+  // grunt-manifest
 
   grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 
