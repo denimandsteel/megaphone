@@ -13,6 +13,7 @@ $(function() {
   }
   if (("standalone" in window.navigator) && window.navigator.standalone){
     $('body').addClass('web-app');
+    // ga('send', 'event', 'visit', 'standalone');
   }
   if (iphone && window.scrollY === 0) {
     window.scrollTo(0,0);
@@ -41,6 +42,7 @@ $(function() {
   $('svg path').click(function() {
     var neighbourhoodId = $(this).attr('id');
     var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
+    // ga('send', 'event', 'button', 'click', neighbourhoodId);
     // Toggle neighbourhood
     if (!neighbourhoods[neighbourhoodId]) return;
     
@@ -82,16 +84,12 @@ $(function() {
 
   if (navigator.geolocation) {
     $('#search').click(function() {
+      // ga('send', 'event', 'button', 'click', 'vendors near me');
       navigator.geolocation.getCurrentPosition(function(position) {
         var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
         var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
 
         $('#current-position').css({ top: (latPercent * 556) + 'px', left: (lonPercent * 640) +'px' }).addClass('active');
-
-        $('svg path').each(function(i, path) {
-          var top = (latPercent * 556);
-          var left = (lonPercent * 640);
-        });
 
         var nearby = document.querySelectorAll('svg')[0].createSVGRect();
         nearby.x = (lonPercent * 640);
@@ -106,7 +104,7 @@ $(function() {
           }
         }
       }, function(err) {
-        alert(err);
+        // ga('send', 'event', 'geolocation', 'fail', err.message);
       });
     });
   }
@@ -151,7 +149,7 @@ $(function() {
           crossStreet2LatLng(crossStreet, attempt++, callback);
         }, 500);
       } else {
-        alert("Geocode was not successful for the following reason: " + status);
+        // ga('send', 'event', 'geocoder', 'fail', status);
       }
     });
   }
@@ -188,6 +186,7 @@ $(function() {
           $(this).removeClass('open');
         }
         else if (!$(this).hasClass('open')) {
+          // ga('send', 'event', 'button', 'click', vendor.Vendor);
           $(this).addClass('open');
           if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
             crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
@@ -198,6 +197,11 @@ $(function() {
           }
         }
       });
+
+      $template.find('a.maplink').click(function() {
+        // ga('send', 'event', 'button', 'click', 'open in maps');
+      });
+
       $($hoodTemplate.find('ul')).append($template);
     });
     $('#vendors').prepend($hoodTemplate);
