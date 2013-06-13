@@ -38,6 +38,10 @@ ul,li { margin:0;padding:0;list-style:none; }
 #vendors .open h3 { padding:26px 0 10px; }
 .vendor { float:left; margin:30px 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
 .button { background:#2f76b4; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; cursor:pointer; text-decoration:none; }
+.button.big {
+  padding: 30px 10px;
+  font-size: 45px;
+}
 .maplink { margin:10px 50px 10px 0; width:200px; background:#eb4859; float:right; }
 .spotting { clear:both; background:#0d63ae; border-radius:40px; color:#fff; padding:30px; font-size:32px; margin-top:10px; float:left; position:relative; }
 .spotting:before {  content: ""; float:left; width: 40px; height: 20px; position:absolute; top:-19px; left:100px; display: block; background: url('images/blue-arrow.png') no-repeat 0 0; }
