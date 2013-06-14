@@ -91,6 +91,6 @@ module.exports = function(grunt) {
   // grunt-contrib-imagemin
   // grunt-manifest
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin']);
 
 };

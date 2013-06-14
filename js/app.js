@@ -2,11 +2,11 @@ $(function() {
   var neighbourhoods = {};
   var hintClicks = [];
   var iphone = !!navigator.userAgent.match(/iphone/i);
-  var geocoder = new google.maps.Geocoder();
-  var vancouverBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(49.1989, -123.2654),
-    new google.maps.LatLng(49.3145, -123.0193)
-  );
+  // var geocoder = new google.maps.Geocoder();
+  // var vancouverBounds = new google.maps.LatLngBounds(
+  //   new google.maps.LatLng(49.1989, -123.2654),
+  //   new google.maps.LatLng(49.3145, -123.0193)
+  // );
 
   if (iphone) {
     $('body').addClass('iphone');
@@ -15,9 +15,9 @@ $(function() {
     $('body').addClass('web-app');
     // ga('send', 'event', 'visit', 'standalone');
   }
-  if (iphone && window.scrollY === 0) {
-    window.scrollTo(0,0);
-  }
+  // if (iphone && window.scrollY === 0) {
+  //   window.scrollTo(0,0);
+  // }
 
   $.ajax({
     url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
@@ -114,7 +114,6 @@ $(function() {
 
   $('.go-to-find').click(function() {
     $('#home').hide();
-    $('#about').hide();
     $('#find').show();
     // Mark my neighbourhoods from cookie
     var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
@@ -127,10 +126,7 @@ $(function() {
   });
   $('#about-megaphone-finder').click(function() {
     // ga('send', 'event', 'button', 'click', 'about');
-    $('#home').hide();
-    $('#about').show();
-    $('#find').hide();
-    window.scrollTo(0, 0);
+    $('#about').toggle();
     return false;
   });
 
@@ -172,7 +168,7 @@ $(function() {
           '<h3><em>' + vendor.Vendor + '</em>' + (vendor.Location !== '' ? ' at ' + vendor.Location  : '') + '</h3>',
           '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
           '<div class="location">' + vendor['Cross Street'] + '</div>',
-          '<a class="maplink button">Open in Maps</a>',
+          '<a href="http://maps.apple.com/maps?q=' + vendor['Cross Street'] + ', Vancouver, BC, Canada" class="maplink button">Open in Maps</a>',
           '<div class="times">' + vendor.Hours + '</div>',
           '<div class="spotting">',
             '<h4>Where to find ' + vendor.Vendor + ':</h4>',
@@ -188,7 +184,7 @@ $(function() {
         else if (!$(this).hasClass('open')) {
           // ga('send', 'event', 'button', 'click', vendor.Vendor);
           $(this).addClass('open');
-          if (vendor['Cross Street'] && vendor['Cross Street'] !== '') {
+          if (false && vendor['Cross Street'] && vendor['Cross Street'] !== '') {
             crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
               var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
               $template.find('a').attr('href', url);

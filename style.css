@@ -36,8 +36,8 @@ ul,li { margin:0;padding:0;list-style:none; }
 #vendors ul { list-style:none; margin:0 0 40px; padding:0; } 
 #vendors li { margin:0; padding:16px 0 24px; background:url('images/dots.gif') no-repeat 0 bottom; overflow:hidden; }
 #vendors li.open { padding:0 0 64px; }
-#vendors .open h3 { padding:26px 0 10px; }
-.vendor { float:left; margin:30px 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
+#vendors .open h3 { padding:26px 0 40px; }
+.vendor { float:left; margin:0 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
 .button { background:#2f76b4; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; cursor:pointer; text-decoration:none; }
 .button.big {
   padding: 30px 10px;
@@ -47,14 +47,16 @@ ul,li { margin:0;padding:0;list-style:none; }
 .spotting { clear:both; background:#0d63ae; border-radius:40px; color:#fff; padding:30px; font-size:32px; margin-top:10px; float:left; position:relative; }
 .spotting:before {  content: ""; float:left; width: 40px; height: 20px; position:absolute; top:-19px; left:100px; display: block; background: url('images/blue-arrow.png') no-repeat 0 0; }
 .location { font-size:32px; font-weight:bold; }
-.open .location, .times { font-size:40px; line-height:45px; width:270px; float:right; padding:30px 0; }
+.open .location, .times { font-size:40px; line-height:45px; width:270px; float:right; padding:0 0 30px; }
+.times { padding-top: 30px; }
 
 /* footer styles */
-#footer h4, #footer a, #footer span { cursor: pointer; padding:19px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
+#footer h4, #footer a, #footer span { cursor: pointer; padding:22px 50px; display:block; background:#e9e7d8; color:#000; text-decoration:none; }
 #footer h4 { padding:20px 50px; background:#bab9ad; } 
 #footer li { border-bottom:2px solid #bab9ad; }
 #add-to-home-screen { display: none; }
 body.iphone #add-to-home-screen { display: block; padding:60px 120px 200px; background:#2f76b4 url('images/big-arrow.png') no-repeat center 240px; color:#fff; text-align:center; line-height:50px; }
+body.iphone.web-app #add-to-home-screen { display:none; }
 
 /* sprites */
 #logo, #search, #vendors h3, #vendors .open h3 { background-image:url('images/icons.png'); background-repeat:no-repeat; background-position:0 0; }
@@ -69,7 +71,19 @@ svg path[vendored="yes"] { cursor: pointer; }
 /** TYLOR's HAXX ZONE */
 /*#home { display: none; }*/
 #find { display: none; }
-#about { display: none; }
+#about { /*display: none; */font-family: Georgia, serif; }
+#about a {
+  color: #0d63ae;
+  padding: 0;
+  display: inline;
+  background: none;
+  text-decoration: underline;
+}
+#about img {
+  float: left;
+  margin: 5px 20px 10px 0;
+}
+
 .hint {  -webkit-transition: opacity 0.5s ease-out; }
 .hide { opacity: 0; }
 
