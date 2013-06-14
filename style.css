@@ -71,7 +71,7 @@ svg path[vendored="yes"] { cursor: pointer; }
 /** TYLOR's HAXX ZONE */
 /*#home { display: none; }*/
 #find { display: none; }
-#about { /*display: none; */font-family: Georgia, serif; }
+#about { display: none; font-family: Georgia, serif; }
 #about a {
   color: #0d63ae;
   padding: 0;
