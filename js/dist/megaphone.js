@@ -1086,6 +1086,12 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
     $('#search').hide();
   }
 
+  $('.go-to-home').click(function() {
+    $('#home').show();
+    $('#find').hide();
+    window.scrollTo(0, 0);
+    return false;
+  });
   $('.go-to-find').click(function() {
     $('#home').hide();
     $('#find').show();
