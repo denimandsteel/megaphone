@@ -1,4 +1,4 @@
-# Megaphone Finder
+# Megaphone Vendor Finder
 
 Megaphone Finder is here to help you if a new issue of [Megaphone Magazine](http://www.megaphonemagazine.com/) is out, and to find vendors in your neighbourhood or nearby when you want to pick up the latest issue.
 
