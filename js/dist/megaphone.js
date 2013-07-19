@@ -1003,7 +1003,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
         if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
           neighbourhoods[vendor.Neighbourhood] = [];
           // Mark and lighten neighbourhoods that have vendors.
-          $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#b0afa3');
+          $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#8db6da');
         }
         neighbourhoods[vendor.Neighbourhood].push(vendor);  
       }
@@ -1022,7 +1022,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
     
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
-      $(this).attr('fill', '#b0afa3');
+      $(this).attr('fill', '#8db6da');
       $('#vendors').find('#neighbourhood-' + neighbourhoodId).remove();
       
       // remove neighborhood from cookie
