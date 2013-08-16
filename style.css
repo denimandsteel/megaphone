@@ -31,12 +31,16 @@ ul,li { margin:0;padding:0;list-style:none; }
 
 /* vendor results list styles */
 #vendor-hint, #intro p { line-height: 1.3em; }
-#vendors, #intro, #about { padding:50px; }
+#vendor-hint { padding: 0 50px; }
+#intro, #about { padding: 50px; }
+#vendors { padding: 50px 0; }
+#vendors h2 { padding: 0 50px; }
 #vendors em { color:#eb4859; }
 #vendors ul { list-style:none; margin:0 0 40px; padding:0; } 
-#vendors li { margin:0; padding:16px 0 24px; background:url('images/dots.gif') no-repeat 0 bottom; overflow:hidden; }
-#vendors li.open { padding:0 0 64px; }
-#vendors .open h3 { padding:26px 0 40px; }
+#vendors li { margin:0; padding:16px 50px 24px; background:url('images/dots.png') no-repeat center bottom; overflow:hidden; }
+#vendors li.open { padding: 0 0px 64px; }
+#vendors .open h3 { padding: 26px 50px 40px; }
+#vendors .open .info { padding: 0 50px; }
 .vendor { float:left; margin:0 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
 .button { background:#2f76b4; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; cursor:pointer; text-decoration:none; }
 .button.big {
@@ -62,7 +66,7 @@ body.iphone.web-app #add-to-home-screen { display:none; }
 #logo, #search, #vendors h3, #vendors .open h3 { background-image:url('images/icons.png'); background-repeat:no-repeat; background-position:0 0; }
 #search { background-position:0 -75px; }
 #vendors h3  { background-position:right -145px; }
-#vendors .open h3 { background-position:right -190px; }
+#vendors .open h3 { background-position:510px -190px; }
 
 /* vendors expanded/hidden view */
 .vendor, .times, .spotting, .maplink { display:none; }
