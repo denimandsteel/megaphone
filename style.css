@@ -22,6 +22,8 @@ ul,li { margin:0;padding:0;list-style:none; }
 #magazine { background:#091824; padding:0 50px 0; position:relative; }
 #magazine .hint { position:relative; margin:0 0 0 -50px; }
 #magazine img { margin:40px 0; border:10px solid #fff; width:520px; height:695px; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
+#intro h2 { font-size: 40px; }
+#intro p { font-size: 32px; }
 #intro .button { margin:40px 0; }
 
 /* map styles */
