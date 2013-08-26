@@ -987,7 +987,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
   }
   if (("standalone" in window.navigator) && window.navigator.standalone){
     $('body').addClass('web-app');
-    // ga('send', 'event', 'visit', 'standalone');
+    ga('send', 'event', 'visit', 'standalone');
   }
   // if (iphone && window.scrollY === 0) {
   //   window.scrollTo(0,0);
@@ -1016,7 +1016,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
   $('svg path').click(function() {
     var neighbourhoodId = $(this).attr('id');
     var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
-    // ga('send', 'event', 'button', 'click', neighbourhoodId);
+    ga('send', 'event', 'button', 'click', neighbourhoodId);
     // Toggle neighbourhood
     if (!neighbourhoods[neighbourhoodId]) return;
     
@@ -1058,7 +1058,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
 
   if (navigator.geolocation) {
     $('#search').click(function() {
-      // ga('send', 'event', 'button', 'click', 'vendors near me');
+      ga('send', 'event', 'button', 'click', 'vendors near me');
       navigator.geolocation.getCurrentPosition(function(position) {
         var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
         var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
@@ -1078,7 +1078,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
           }
         }
       }, function(err) {
-        // ga('send', 'event', 'geolocation', 'fail', err.message);
+        ga('send', 'event', 'geolocation', 'fail', err.message);
       });
     });
   }
@@ -1105,7 +1105,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
     return false;
   });
   $('#about-megaphone-finder').click(function() {
-    // ga('send', 'event', 'button', 'click', 'about');
+    ga('send', 'event', 'button', 'click', 'about');
     $('#about').toggle();
     return false;
   });
@@ -1125,7 +1125,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
           crossStreet2LatLng(crossStreet, attempt++, callback);
         }, 500);
       } else {
-        // ga('send', 'event', 'geocoder', 'fail', status);
+        ga('send', 'event', 'geocoder', 'fail', status);
       }
     });
   }
@@ -1164,7 +1164,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
           $(this).removeClass('open');
         }
         else if (!$(this).hasClass('open')) {
-          // ga('send', 'event', 'button', 'click', vendor.Vendor);
+          ga('send', 'event', 'button', 'click', vendor.Vendor);
           $(this).addClass('open');
           if (false && vendor['Cross Street'] && vendor['Cross Street'] !== '') {
             crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
@@ -1177,7 +1177,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
       });
 
       $template.find('a.maplink').click(function() {
-        // ga('send', 'event', 'button', 'click', 'open in maps');
+        ga('send', 'event', 'button', 'click', 'open in maps');
       });
 
       $($hoodTemplate.find('ul')).append($template);

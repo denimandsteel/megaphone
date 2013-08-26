@@ -77,10 +77,10 @@
   <div id="footer">
     <h4>More</h4>
     <ul>
-      <li><a href="mailto:info@megaphonemagazine.com?subject=Megaphone%20Finder%20Feedback">Send Feedback by Email</a></li>
-      <li><a href="http://twitter.com/share?url=http%3A%2F%2Ffind.megaphonemagazine.com&amp;text=Find%20the%20%40MegaphoneMag%20vendor%20in%20your%20community%20at">Help Spread the Word on Twitter</a></li>
-      <li><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Ffind.megaphonemagazine.com">Help Spread the Word on Facebook</a></li>
-      <li><a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&amp;SESSION=as8jd_oZWW05SLYWdEUcuzwwxZCsmhF_-XnpLXDS4PqX9RNOLin21m1reDi&dispatch=5885d80a13c0db1f8e263663d3faee8d92b37e35c82a7c965120dd5a9b6ad0e3">Donate to Megaphone</a></li>
+      <li onclick="ga('send', 'event', 'button', 'click', 'email')"><a href="mailto:info@megaphonemagazine.com?subject=Megaphone%20Finder%20Feedback">Send Feedback by Email</a></li>
+      <li onclick="ga('send', 'event', 'button', 'click', 'twitter')"><a href="http://twitter.com/share?url=http%3A%2F%2Ffind.megaphonemagazine.com&amp;text=Find%20the%20%40MegaphoneMag%20vendor%20in%20your%20community%20at">Help Spread the Word on Twitter</a></li>
+      <li onclick="ga('send', 'event', 'button', 'click', 'facebook')"><a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Ffind.megaphonemagazine.com">Help Spread the Word on Facebook</a></li>
+      <li onclick="ga('send', 'event', 'button', 'click', 'donate')"><a href="http://megaphonemagazine.com/donate">Donate to Megaphone</a></li>
       <li>
         <span id="about-megaphone-finder">About</span>
         <div id="about">
@@ -90,7 +90,7 @@
           <p>Megaphone Finder was designed and developed by <a href="http://denimandsteel.com/">Denim &amp; Steel Interactive</a> as a contribution to the worthwhile work that Megaphone is doing in our community.</p>
         </div>
       </li>
-      <li><a href="http://megaphonemagazine.com">Visit the Megaphone Website</a></li>
+      <li onclick="ga('send', 'event', 'button', 'click', 'megaphone website')"><a href="http://megaphonemagazine.com">Visit the Megaphone Website</a></li>
     </ul>
   </div><!--footer-->
   <div id="add-to-home-screen">
@@ -98,13 +98,13 @@
   </div>
 </div><!-- container -->
   <script>
-    // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    // ga('create', 'UA-41576133-1', 'megaphonemagazine.com');
-    // ga('send', 'pageview');
+    ga('create', 'UA-41576133-1', 'megaphonemagazine.com');
+    ga('send', 'pageview');
   </script>
   <script src="js/dist/megaphone.min.js"></script>
 </body>
