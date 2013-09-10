@@ -30,6 +30,7 @@ ul,li { margin:0;padding:0;list-style:none; }
 #map { height:555px; width:640px; background:#e9e7d8; box-shadow: 0px 0px 10px rgba(0,0,0,0.5); position:relative; } 
 #map .hint { position: absolute; }
 #search { position:absolute; bottom:20px; left:20px; font-family:"Roboto Condensed", Helvetica, Arial, sans-serif; font-size:22px; line-height:25px; height:50px; text-transform:uppercase; padding:10px 10px 10px 80px; background:#1d6cb0; color:#fff; text-align:left; border-radius:30px; width:120px; box-shadow: 0 3px 3px rgba(0,0,0,0.5); cursor:pointer; }
+#search:hover, #search:focus { background-color: #08365C; }
 
 /* vendor results list styles */
 #vendor-hint, #intro p { line-height: 1.3em; }
@@ -49,6 +50,7 @@ ul,li { margin:0;padding:0;list-style:none; }
   padding: 30px 10px;
   font-size: 45px;
 }
+.button:hover, .button:focus { background-color: #08365C; }
 .maplink { margin:10px 50px 10px 0; width:200px; background:#eb4859; float:right; }
 .spotting { clear:both; background:#0d63ae; border-radius:40px; color:#fff; padding:30px; font-size:32px; margin-top:10px; float:left; position:relative; }
 .spotting:before {  content: ""; float:left; width: 40px; height: 20px; position:absolute; top:-19px; left:100px; display: block; background: url('images/blue-arrow.png') no-repeat 0 0; }
