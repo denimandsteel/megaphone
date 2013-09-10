@@ -94,8 +94,8 @@ $(function() {
         var nearby = document.querySelectorAll('svg')[0].createSVGRect();
         nearby.x = (lonPercent * 640);
         nearby.y = (latPercent * 556);
-        nearby.width = 15;
-        nearby.height = 15;
+        nearby.width = 60;
+        nearby.height = 60;
         // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
         var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null);
         for (var i = 0; i < list.length; i++) {
