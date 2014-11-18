@@ -19,22 +19,24 @@ $(function() {
   //   window.scrollTo(0,0);
   // }
 
-  $.ajax({
-    url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=0&output=csv',
-  })
-  .success(function(data) {
-    var vendors = $.csv.toObjects(data);
-    $.each(vendors, function(i, vendor) {
-      if (vendor.Neighbourhood !== '') {
-        if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
-          neighbourhoods[vendor.Neighbourhood] = [];
-          // Mark and lighten neighbourhoods that have vendors.
-          $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#8db6da');
+  // Spreadsheet IDs: { 0: Vancouver, 3: Victoria }.
+  $.each([0,3], function(i, sheetId) {
+    $.ajax({
+      url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=' + sheetId + '&output=csv',
+    })
+    .success(function(data) {
+      var vendors = $.csv.toObjects(data);
+      $.each(vendors, function(i, vendor) {
+        if (vendor.Neighbourhood !== '') {
+          if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
+            neighbourhoods[vendor.Neighbourhood] = [];
+            // Mark and lighten neighbourhoods that have vendors.
+            $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#8db6da');
+          }
+          neighbourhoods[vendor.Neighbourhood].push(vendor);
         }
-        neighbourhoods[vendor.Neighbourhood].push(vendor);  
-      }
+      });
     });
-    
   });
 
   new FastClick(document.body);
@@ -86,18 +88,25 @@ $(function() {
     $('#search').click(function() {
       ga('send', 'event', 'button', 'click', 'vendors near me');
       navigator.geolocation.getCurrentPosition(function(position) {
-        var latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
-        var lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
+        var latPercent = null, lonPercent = null;
+        if ($('body').hasClass('vancouver')) {
+          latPercent = (position.coords.latitude - 49.3158)/(49.1961 - 49.3158);
+          lonPercent = (position.coords.longitude + 123.2342)/(-123.0229 + 123.2342);
+        }
+        else {
+          latPercent = (position.coords.latitude - 48.4542)/(48.3994 - 48.4542);
+          lonPercent = (position.coords.longitude + 123.4055)/(-123.3128 + 123.4055);
+        }
 
         $('#current-position').css({ top: (latPercent * 556) + 'px', left: (lonPercent * 640) +'px' }).addClass('active');
 
-        var nearby = document.querySelectorAll('svg')[0].createSVGRect();
+        var nearby = document.querySelectorAll('svg.' + $('body').attr('class'))[0].createSVGRect();
         nearby.x = (lonPercent * 640);
         nearby.y = (latPercent * 556);
         nearby.width = 60;
         nearby.height = 60;
-        // document.querySelectorAll('svg')[0].appendChild(nearby); // Exception?
-        var list = document.querySelectorAll('svg')[0].getIntersectionList(nearby, null);
+        // document.querySelectorAll('svg.' + $('body').attr('class'))[0].appendChild(nearby); // Exception?
+        var list = document.querySelectorAll('svg.' + $('body').attr('class'))[0].getIntersectionList(nearby, null);
         for (var i = 0; i < list.length; i++) {
           if ($(list[i]).attr('class') !== 'active') {
             $(list[i]).click();
@@ -118,18 +127,32 @@ $(function() {
     window.scrollTo(0, 0);
     return false;
   });
+
   $('.go-to-find').click(function() {
     $('#home').hide();
     $('#find').show();
-    // Mark my neighbourhoods from cookie
-    var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
-    jQuery.unique(myHoods);
-    $.each(myHoods, function(i, hoodId) {
-      selectNeighourhoodWithId(hoodId);
-    });
+
+    // Show map by city.
+    var city = $(this).attr('id').replace('-switch', '');
+    $('body').attr('class', city);
+
+    if ($(this).hasClass('switch')) {
+      $('#vendors .neighbourhood').remove();
+      $('#vendor-hint').show();
+      $('path.active').click();
+    }
+    else {
+      // Mark my neighbourhoods from cookie
+      var myHoods = $.cookie('my_hoods') ? JSON.parse($.cookie('my_hoods')) : [];
+      jQuery.unique(myHoods);
+      $.each(myHoods, function(i, hoodId) {
+        selectNeighourhoodWithId(hoodId);
+      });
+    }
     window.scrollTo(0, 0);
     return false;
   });
+
   $('#about-megaphone-finder').click(function() {
     ga('send', 'event', 'button', 'click', 'about');
     $('#about').toggle();

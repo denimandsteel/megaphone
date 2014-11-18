@@ -77,7 +77,13 @@ body.iphone.web-app #add-to-home-screen { display:none; }
 .vendor, .times, .spotting, .maplink { display:none; }
 .open .vendor, .open .times, .open .spotting, .open .maplink { display:block; }
 svg path[vendored="yes"] { cursor: pointer; }
-/** TYLOR's HAXX ZONE */
+svg,
+#footer .switch { display: none; }
+body.vancouver #footer #victoria-switch,
+body.vancouver svg.vancouver,
+body.victoria #footer #vancouver-switch,
+body.victoria svg.victoria { display: block; }
+
 /*#home { display: none; }*/
 #find { display: none; }
 #about { display: none; font-family: Georgia, serif; }
