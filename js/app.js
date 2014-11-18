@@ -198,7 +198,7 @@ $(function() {
           '<div class="info">',
             '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
             '<div class="location">' + vendor['Cross Street'] + '</div>',
-            '<a href="http://maps.apple.com/maps?q=' + vendor['Cross Street'] + ', Vancouver, BC, Canada" class="maplink button">Open in Maps</a>',
+            '<a href="http://maps.apple.com/maps?q=' + vendor['Cross Street'] + ', ' + toTitleCase($('body').attr('class')) + ', BC, Canada" class="maplink button">Open in Maps</a>',
             '<div class="times">' + vendor.Hours + '</div>',
             '<div class="spotting">',
               '<h4>Where to find ' + vendor.Vendor + ':</h4>',
