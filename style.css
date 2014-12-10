@@ -45,7 +45,7 @@ ul,li { margin:0;padding:0;list-style:none; }
 #vendors li.open { padding: 0 0px 64px; }
 #vendors .open h3 { padding: 26px 50px 40px; }
 #vendors .open .info { padding: 0 50px; }
-.vendor { float:left; margin:0 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
+.vendor { float:left; margin:0 0 40px; border:10px solid #fff; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; width: 220px; height: auto; }
 .button { background:#2f76b4; height:40px; padding:10px; font-size:30px; line-height:40px; border-radius:30px; text-align:center; display:block; color:#fff; cursor:pointer; text-decoration:none; }
 .button.big {
   padding: 30px 10px;

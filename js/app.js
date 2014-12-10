@@ -196,7 +196,7 @@ $(function() {
         '<li>',
           '<h3><em>' + vendor.Vendor + '</em>' + (vendor.Location !== '' ? ' at ' + vendor.Location  : '') + '</h3>',
           '<div class="info">',
-            '<img src="' + vendor['Portrait Path'] + '" alt="" width="220" height="300" class="vendor">',
+            '<img src="' + vendor['Portrait Path'] + '" alt="" class="vendor">',
             '<div class="location">' + vendor['Cross Street'] + '</div>',
             '<a href="http://maps.apple.com/maps?q=' + vendor['Cross Street'] + ', ' + toTitleCase($('body').attr('class')) + ', BC, Canada" class="maplink button">Open in Maps</a>',
             '<div class="times">' + vendor.Hours + '</div>',
