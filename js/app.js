@@ -20,9 +20,9 @@ $(function() {
   // }
 
   // Spreadsheet IDs: { 0: Vancouver, 3: Victoria }.
-  $.each([0,3], function(i, sheetId) {
+  $.each(['vancouver','victoria'], function(i, sheetId) {
     $.ajax({
-      url: 'https://docs.google.com/spreadsheets/d/1sFPZ95Lk0qRQqyzUO2A9gO83S5c_iBdy3Y6zQlcN5-g/export?gid=' + sheetId + '&format=csv',
+      url: '/vendors-' + sheetId + '.csv',
     })
     .success(function(data) {
       var vendors = $.csv.toObjects(data);
