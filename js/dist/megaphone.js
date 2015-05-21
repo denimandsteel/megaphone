@@ -996,7 +996,7 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
   // Spreadsheet IDs: { 0: Vancouver, 3: Victoria }.
   $.each([0,3], function(i, sheetId) {
     $.ajax({
-      url: 'https://docs.google.com/spreadsheet/pub?key=0Ag9T21YG-5w4dDVuU2JfR2Q4RjRTNHJKYk81aFNMT1E&single=true&gid=' + sheetId + '&output=csv',
+      url: 'https://docs.google.com/spreadsheets/d/1sFPZ95Lk0qRQqyzUO2A9gO83S5c_iBdy3Y6zQlcN5-g/export?gid=' + sheetId + '&format=csv',
     })
     .success(function(data) {
       var vendors = $.csv.toObjects(data);
