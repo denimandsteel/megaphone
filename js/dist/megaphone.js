@@ -993,21 +993,21 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
   //   window.scrollTo(0,0);
   // }
 
-  // Spreadsheet IDs: { 0: Vancouver, 3: Victoria }.
-  $.each(['vancouver','victoria'], function(i, sheetId) {
-    $.ajax({
-      url: '/vendors-' + sheetId + '.csv',
-    })
-    .success(function(data) {
-      var vendors = $.csv.toObjects(data);
-      $.each(vendors, function(i, vendor) {
-        if (vendor.Neighbourhood !== '') {
-          if (typeof neighbourhoods[vendor.Neighbourhood] === 'undefined') {
-            neighbourhoods[vendor.Neighbourhood] = [];
-            // Mark and lighten neighbourhoods that have vendors.
-            $('#' + vendor.Neighbourhood).attr('vendored', 'yes').attr('fill', '#8db6da');
+  $.ajax({
+     url: 'https://megaphone-app-staging.herokuapp.com/vendors.json',
+  })
+  .success(function(data) {
+    var vendors = data;
+    $.each(vendors, function(i, vendor) {
+      $.each(vendor.locations, function(i, location) {
+        location.vendor = vendor;
+        if (location.neighbourhood !== '') {
+          if (typeof neighbourhoods[location.neighbourhood] === 'undefined') {
+            neighbourhoods[location.neighbourhood] = [];
+            // Mark and lighten serverNeighbourhoods that have vendors.
+            $('#' + location.neighbourhood).attr('vendored', 'yes').attr('fill', '#8db6da');
           }
-          neighbourhoods[vendor.Neighbourhood].push(vendor);
+          neighbourhoods[location.neighbourhood].push(location);
         }
       });
     });
@@ -1160,23 +1160,23 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
     $('#' + neighbourhoodId).attr('class', 'active');
     $('#' + neighbourhoodId).attr('fill', '#eb4859');
     // render neighbourhood template
-    var vendors = neighbourhoods[neighbourhoodId];
+    var locations = neighbourhoods[neighbourhoodId];
     var $hoodTemplate = $('<div id="neighbourhood-' + neighbourhoodId + '" class="neighbourhood"><h2>' + toTitleCase(neighbourhoodId.replace('-', ' ')) + '</h2><ul></ul></div>');
-    vendors.sort(function(a, b) {
-      return a['Cross Street'] > b['Cross Street'];
+    locations.sort(function(a, b) {
+      return a.cross_street > b.cross_street;
     });
-    $.each(vendors, function(index, vendor) {
+    $.each(locations, function(index, location) {
       var $template = $([
         '<li>',
-          '<h3><em>' + vendor.Vendor + '</em>' + (vendor.Location !== '' ? ' at ' + vendor.Location  : '') + '</h3>',
+          '<h3><em>' + location.vendor.name + '</em>' + (location.name !== '' ? ' at ' + location.name  : '') + '</h3>',
           '<div class="info">',
-            '<img src="' + vendor['Portrait Path'] + '" alt="" class="vendor">',
-            '<div class="location">' + vendor['Cross Street'] + '</div>',
-            '<a href="http://maps.apple.com/maps?q=' + vendor['Cross Street'] + ', ' + toTitleCase($('body').attr('class')) + ', BC, Canada" class="maplink button">Open in Maps</a>',
-            '<div class="times">' + vendor.Hours + '</div>',
+            '<img src="' + location.vendor.image.profile.url + '" alt="" class="vendor">',
+            '<div class="location">' + location.cross_street + '</div>',
+            '<a href="http://maps.apple.com/maps?q=' + location.cross_street + ', ' + toTitleCase($('body').attr('class')) + ', BC, Canada" class="maplink button">Open in Maps</a>',
+            '<div class="times">' + location.hours + '</div>',
             '<div class="spotting">',
-              '<h4>Where to find ' + vendor.Vendor + ':</h4>',
-              '<p>' + vendor.Description + '</p>',
+              '<h4>Where to find ' + location.vendor.name + ':</h4>',
+              '<p>' + location.description + '</p>',
             '</div>',
           '</div>',
         '</li>',
@@ -1187,10 +1187,10 @@ FastClick.notNeeded=function(){var a;if("undefined"===typeof window.ontouchstart
           $(this).removeClass('open');
         }
         else if (!$(this).hasClass('open')) {
-          ga('send', 'event', 'button', 'click', vendor.Vendor);
+          ga('send', 'event', 'button', 'click', location.vendor.name);
           $(this).addClass('open');
-          if (false && vendor['Cross Street'] && vendor['Cross Street'] !== '') {
-            crossStreet2LatLng(vendor['Cross Street'], 0, function(location) {
+          if (false && location.cross_street && location.cross_street !== '') {
+            crossStreet2LatLng(location.cross_street, 0, function(location) {
               var url = 'http://maps.google.com/maps?q=' + location.toUrlValue();
               $template.find('a').attr('href', url);
               // ?? http://developer.apple.com/library/ios/#featuredarticles/iPhoneURLScheme_Reference/Articles/MapLinks.html
