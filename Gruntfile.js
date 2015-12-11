@@ -9,7 +9,6 @@ module.exports = function(grunt) {
       dist: {
         src: [
           'js/lib/jquery-1.10.1.min.js',
-          'js/lib/jquery.csv.js',
           'js/lib/fastclick.min.js',
           'js/lib/jquery.cookie.js',
           'js/app.js',

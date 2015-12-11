@@ -21,8 +21,9 @@ ul,li { margin:0;padding:0;list-style:none; }
 /* home/splash page styles */
 #magazine { background:#091824; padding:0 50px 0; position:relative; }
 #magazine .hint { position:relative; margin:0 0 0 -50px; }
-#magazine img { margin:40px 0; border:10px solid #fff; width:520px; height:695px; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
-#magazine img.ad { margin-bottom: 0; height: 140px; }
+#magazine img:first-child { margin-top: 40px; }
+#magazine img { margin:0 0 40px; border:10px solid #fff; width:520px; box-shadow:0 3px 5px rgba(0,0,0,0.5); background:#ccc; }
+#magazine img.ad { margin: 40px 0; }
 #intro h2 { font-size: 40px; }
 #intro p { font-size: 32px; }
 #intro .button { margin:40px 0; }
