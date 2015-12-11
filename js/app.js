@@ -48,7 +48,6 @@ $(function() {
   })
   .success(function(data) {
     var products = data;
-    window.hello = products;
     $.each(products, function(i, product) {  
       if (product.category === "Feature") {
         var featureProductCover = '<img class="ad" src="' + product.image.cover.url + '" alt="' + product.title + '">';
