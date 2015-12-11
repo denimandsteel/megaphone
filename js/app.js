@@ -1,6 +1,8 @@
 $(function() {
   var neighbourhoods = {};
   var hintClicks = [];
+  var featureProduct;
+  var onSaleMagazine;
   var iphone = !!navigator.userAgent.match(/iphone/i);
   // var geocoder = new google.maps.Geocoder();
   // var vancouverBounds = new google.maps.LatLngBounds(
@@ -39,6 +41,27 @@ $(function() {
     });
   });
 
+
+  $.ajax({
+     url: 'https://megaphone-app-staging.herokuapp.com/products.json',
+  })
+  .success(function(data) {
+    var products = data;
+    window.hello = products;
+    $.each(products, function(i, product) {  
+      if (product.category === "Feature") {
+        var featureProductCover = '<img class="ad" src="' + product.image.cover.url + '" alt="' + product.title + '">';
+        $('#magazine').prepend(featureProductCover);
+      }        
+      if (product.category === "Magazine") {
+        var magazineCover = '<img src="' + product.image.cover.url + '" alt="' + product.title + '">';
+        var magazineDescription = '<h2> Current Issue: ' + product.title + '</h2><p>' + product.description + '</p><br>';  
+        $('#magazine').append(magazineCover);
+        $('#intro').prepend(magazineDescription);
+      }       
+    });
+  });
+
   new FastClick(document.body);
 
   $('svg path').click(function() {
@@ -47,7 +70,7 @@ $(function() {
     ga('send', 'event', 'button', 'click', neighbourhoodId);
     // Toggle neighbourhood
     if (!neighbourhoods[neighbourhoodId]) return;
-    
+
     if ($(this).attr('class') === 'active') {
       $(this).attr('class', '');
       $(this).attr('fill', '#8db6da');
@@ -194,7 +217,7 @@ $(function() {
     $.each(locations, function(index, location) {
       var $template = $([
         '<li>',
-          '<h3><em>' + location.vendor.name + '</em>' + (location.name !== '' ? ' at ' + location.name  : '') + '</h3>',
+          '<h3><em>' + location.vendor.name + '</em>' + (location.name !== null ? ' at ' + location.name  : '') + '</h3>',
           '<div class="info">',
             '<img src="' + location.vendor.image.profile.url + '" alt="" class="vendor">',
             '<div class="location">' + location.cross_street + '</div>',
