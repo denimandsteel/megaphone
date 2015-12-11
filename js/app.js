@@ -4,6 +4,7 @@ $(function() {
   var featureProduct;
   var onSaleMagazine;
   var iphone = !!navigator.userAgent.match(/iphone/i);
+  var megaphoneServerUrl = 'https://megaphone-magazine.herokuapp.com/';
   // var geocoder = new google.maps.Geocoder();
   // var vancouverBounds = new google.maps.LatLngBounds(
   //   new google.maps.LatLng(49.1989, -123.2654),
@@ -22,7 +23,7 @@ $(function() {
   // }
 
   $.ajax({
-     url: 'https://megaphone-app-staging.herokuapp.com/vendors.json',
+     url: megaphoneServerUrl + '/vendors.json',
   })
   .success(function(data) {
     var vendors = data;
@@ -43,7 +44,7 @@ $(function() {
 
 
   $.ajax({
-     url: 'https://megaphone-app-staging.herokuapp.com/products.json',
+     url: megaphoneServerUrl + '/products.json',
   })
   .success(function(data) {
     var products = data;
